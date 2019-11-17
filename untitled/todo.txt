@@ -1,0 +1,15 @@
+To-do list for final project
+
+- Create Firebase account for the project -- DONE
+- Set up database correctly -- DONE 
+- Create x recipes 
+- Transform recipes in JSON objects -- DONE 
+- Push JSON objects in firebase -- DONE 
+    - possible either directly in the database, or via a function in the script
+- Create page to allow users to enter their recipes in the firebase database -- Working on this
+- Fix bug with Carousel image so they fit properly 
+
+// I haven't updated the glitch file yet, I am making changes on the file I have on my local machine. 
+// I will update early Sunday 17/11/19 
+// Let me know if you do any changes so I can add them to my version
+- Tim 
