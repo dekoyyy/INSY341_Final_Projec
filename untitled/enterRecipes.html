@@ -23,7 +23,6 @@
     <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
 
     <script>
-
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
@@ -45,58 +44,57 @@
         </ul>
 
     </nav>
-    <div class="jumbotron text-center">
-        <h1>Add your recipe to our database !</h1>
-    </div>
-    <div class = "container">
-        <h3> Choose your first ingredient </h3>
-
-        <div class = "row">
-            <form class = "form-inline">
-                <div class = "form-group">
-                    <select class = "form-control" id ="ingredient1">
-                        <option value selected ="selected"> Select an ingredient </option>
-                        <option value="one">one</option>
-                        <option value="two">two</option>
-                        <option value="three">three</option>
-                    </select>
+            <div class="jumbotron text-center">
+                <h1>Add your recipe to our database !</h1>
+            </div>
+        <div class = "container">
+            <h3> Choose your first ingredient </h3>
+                <div class = "row">
+                    <form class = "form-inline">
+                        <div class = "form-group">
+                            <select class = "form-control" id ="ingredient1">
+                                <option value selected ="selected"> Select an ingredient </option>
+                                <option value="one">one</option>
+                                <option value="two">two</option>
+                                <option value="three">three</option>
+                            </select>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
 
-        <h3> Then your second ingredient </h3>
-        <div class = "row">
-            <form class = "form-inline">
-                <div class = "form-group">
-                    <select class = "form-control" id ="ingredient2">
-                        <option value selected ="selected"> Select an ingredient </option>
-                        <option value="one">one</option>
-                        <option value="two">two</option>
-                        <option value="three">three</option>
-                    </select>
+            <h3> Then your second ingredient </h3>
+                <div class = "row">
+                    <form class = "form-inline">
+                        <div class = "form-group">
+                            <select class = "form-control" id ="ingredient2">
+                                <option value selected ="selected"> Select an ingredient </option>
+                                <option value="one">one</option>
+                                <option value="two">two</option>
+                                <option value="three">three</option>
+                            </select>
+                        </div>
+                    </form>
                 </div>
-            </form>
+
+            <h3> And your third ingredient</h3>
+                `<div class = "row">
+                    <form class = "form-inline">
+                        <div class = "form-group">
+                            <select class = "form-control" id = "ingredient3">
+                                <option value selected ="selected"> Select an ingredient </option>
+                                <option value="one">one</option>
+                                <option value="two">two</option>
+                                <option value="three">three</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>`
+
+            <h3> Give your recipe a name </h3>
+            <input id = "recipeName" type="text" class="form-control-plaintext" placeholder= "Enter your recipe's name">
+            <h3> And give us the link to the website where you found it </h3>
+            <input id = "recipeLink" type="text" class="form-control-plaintext" placeholder= "Enter your recipe's link">
+            <button onclick = "createRecipeJson()" > Submit </button>
         </div>
-
-        <h3> And your third ingredient</h3>
-        <div class = "row">
-            <form class = "form-inline">
-                <div class = "form-group">
-                    <select class = "form-control" id = "ingredient3">
-                        <option value selected ="selected"> Select an ingredient </option>
-                        <option value="one">one</option>
-                        <option value="two">two</option>
-                        <option value="three">three</option>
-                    </select>
-                </div>
-            </form>
-        </div>
-
-        <h3> Give your recipe a name </h3>
-
-        <h3> And give us the link to the website where you found it </h3>
-
-        <button onclick = "getDropDownValue()" > Submit </button>
-    </div>
 </body>
 </html>

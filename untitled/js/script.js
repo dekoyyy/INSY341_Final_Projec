@@ -24,11 +24,11 @@ var data = [];
 function readData () {
     var loc = firebase.database().ref();
     firebase.database.ref().on('value', function(snapshot) {
-        console.log("got snapshot of all objects at this point in time");
-        snapshot.forEach(function(loc){
-            productArray,push(loc.val());
+            console.log("got snapshot of all objects at this point in time");
+            snapshot.forEach(function(loc){
+                productArray,push(loc.val());
             });
-        displayData(productArray);
+            displayData(productArray);
         }
     );
 }
@@ -194,12 +194,21 @@ var jasonObj =
 
 function createRecipeJson() {
     var recipe = {};
+    var targetId;
     var i = 1;
 
     for (i = 1; i < 4; i++) {
-        recipe["ingredient" + i] = getDropDownValue(i);
-        console.log(recipe["ingredient" + i]);
+        targetId = "ingredient" + i;
+        recipe[targetId] = getDropDownValue(i);
+        console.log(recipe[targetId]);
     }
+
+    recipe["recipeName"] =document.getElementById("recipeName").value;
+    recipe["recipeLink"]= document.getElementById("recipeLink").value;
+
+    console.log(recipe["recipeName"]);
+    console.log(recipe["recipeLink"]);
+
     return recipe;
 
 }
@@ -212,5 +221,6 @@ function getDropDownValue(i) {
     targetId = "ingredient" + i;
     e = document.getElementById(targetId);
     strUser = e.options[e.selectedIndex].value;
+    return strUser;
     console.log(strUser);
 }
