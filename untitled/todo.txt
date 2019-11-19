@@ -1,15 +1,37 @@
 To-do list for final project
 
 - Create Firebase account for the project -- DONE
+
 - Set up database correctly -- DONE 
+
 - Create x recipes 
+    -- Still have to add some 
+        -- Generalize ingredients
+              -- Change rotisserie chicken to chicken, so on 
+              -- Maximize the number of common ingredients
+    -- Need to have images for every ingredient
+        -- Edit pictures so that they have all the same dimensions
+        
 - Transform recipes in JSON objects -- DONE 
+
 - Push JSON objects in firebase -- DONE 
     - possible either directly in the database, or via a function in the script
-- Create page to allow users to enter their recipes in the firebase database -- Working on this
+    
+- Create page to allow users to enter their recipes in the firebase database -- DONE
+    - Dynamically create options with what is in the database -- DONE
+        - Create array from database -- DONE
+        - Remove duplicates from this array -- DONE
+
+
 - Fix bug with Carousel image so they fit properly 
 
-// I haven't updated the glitch file yet, I am making changes on the file I have on my local machine. 
-// I will update early Sunday 17/11/19 
-// Let me know if you do any changes so I can add them to my version
-- Tim 
+- Create function to get a recipe 
+      - How it will work 
+            - When page loads, carousel loads dynamically with all the different Ingredient 1. 
+            - When selecting an Ingredient 1, narrows down to Ingredient 2 that have the Ingredient 1 selected
+                  - If you choose chicken as Ingredient 1, only shows Ingredient 2 whose Ingredient 1 is chicken
+            - When Ingredient 3 is chosen, hides Carousel and shows the recipe link and recipe name 
+            
+- Create carousel dynamically 
+- 
+
