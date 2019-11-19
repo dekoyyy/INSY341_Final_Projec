@@ -30,7 +30,7 @@ function displayData(arr) {
     document.getElementById("demo").innerHTML = result;
 }
 
-function updateIngredient1Array(arr) {
+function updateIngredient1Array(arr) { // adds opttions underneath ingredient1
     var newOption;
     var i = 0;
 
@@ -45,7 +45,7 @@ function updateIngredient1Array(arr) {
 
 }
 
-function updateIngredient2Array(arr) {
+function updateIngredient2Array(arr) { // adds opttions underneath ingredient1
     var newOption;
     var i = 0;
 
@@ -60,11 +60,11 @@ function updateIngredient2Array(arr) {
 
 }
 
-function updateIngredient3Array(arr) {
+function updateIngredient3Array(arr) { // adds opttions underneath ingredient1
     var newOption;
     var i = 0;
 
-    targetId = document.getElementById("ingredient3")
+    targetId = document.getElementById("ingredient3");
 
     for (i = 0; i < arr.length; i++) {
         newOption = document.createElement("option");
@@ -81,8 +81,9 @@ function readData () {
             console.log("got snapshot of all objects at this point in time");
             snapshot.forEach(function(loc){
                 productArray.push(loc.val());
+                console.log(productArray)
             });
-            displayData(productArray);
+            // displayData(productArray);
            //  updateIngredient1Array(ingredient1Array);
            //  updateIngredient2Array(ingredient2Array);
            //  updateIngredient3Array(ingredient3Array);
