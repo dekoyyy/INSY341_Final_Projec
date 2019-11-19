@@ -1,9 +1,3 @@
-function addData(obj, location){
-
-    firebase.database().ref(location).push(obj);
-
-    alert("data saved");  //in real app you need to use firebase API to get this confirmation.
-}
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -19,28 +13,83 @@ var firebaseConfig = {
 
 var productArray = [];
 var data = [];
+var ingredient1Array = [];
+var ingredient2Array = [];
+var ingredient3Array = [];
+
 // var databaseLocation = new Firebase ('https://insy341-finalprojet.firebaseio.com');
 
-function readData () {
-    var loc = firebase.database().ref();
-    firebase.database.ref().on('value', function(snapshot) {
-            console.log("got snapshot of all objects at this point in time");
-            snapshot.forEach(function(loc){
-                productArray,push(loc.val());
-            });
-            displayData(productArray);
-        }
-    );
-}
+
 function displayData(arr) {
     var result = "";
     var i = 0;
-
+    // add for loop so it cycles through each array
     for (i = 0; i < arr[0].length; i++) {
-        result = result + arr[0][i].name + "<br>";
+        result = result + arr[0][i].ingredient1 + "<br>";
     }
     document.getElementById("demo").innerHTML = result;
 }
+
+function updateIngredient1Array(arr) {
+    var newOption;
+    var i = 0;
+
+    targetId = document.getElementById("ingredient1")
+
+    for (i = 0; i < arr.length; i++) {
+        newOption = document.createElement("option");
+        newOption.text = arr[i].ingredient1;
+        console.log(arr[i].ingredient1);
+        targetId.add(newOption);
+    }
+
+}
+
+function updateIngredient2Array(arr) {
+    var newOption;
+    var i = 0;
+
+    targetId = document.getElementById("ingredient2")
+
+    for (i = 0; i < arr.length; i++) {
+        newOption = document.createElement("option");
+        newOption.text = arr[i].ingredient2;
+        console.log(arr[i].ingredient2)
+        targetId.add(newOption);
+    }
+
+}
+
+function updateIngredient3Array(arr) {
+    var newOption;
+    var i = 0;
+
+    targetId = document.getElementById("ingredient3")
+
+    for (i = 0; i < arr.length; i++) {
+        newOption = document.createElement("option");
+        newOption.text = arr[i].ingredient3;
+        console.log(arr[i].ingredient3)
+        targetId.add(newOption);
+    }
+
+}
+
+function readData () {
+    var loc = firebase.database().ref("recipes");
+    firebase.database.ref("recipes").on('value', function(snapshot) {
+            console.log("got snapshot of all objects at this point in time");
+            snapshot.forEach(function(loc){
+                productArray.push(loc.val());
+            });
+            displayData(productArray);
+           //  updateIngredient1Array(ingredient1Array);
+           //  updateIngredient2Array(ingredient2Array);
+           //  updateIngredient3Array(ingredient3Array);
+        }
+    );
+}
+
 var jasonObj =
     [
         {
@@ -210,8 +259,15 @@ function createRecipeJson() {
     console.log(recipe["recipeLink"]);
 
     return recipe;
-
 }
+
+function saveData() {
+        var obj = createRecipeJson();
+        firebase.database().ref("recipes").push(obj);
+        console.log("Saved");
+    }
+
+
 
 function getDropDownValue(i) {
     var targetId;

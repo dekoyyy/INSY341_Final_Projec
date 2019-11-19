@@ -54,9 +54,11 @@
                         <div class = "form-group">
                             <select class = "form-control" id ="ingredient1">
                                 <option value selected ="selected"> Select an ingredient </option>
-                                <option value="one">one</option>
-                                <option value="two">two</option>
-                                <option value="three">three</option>
+                                <option value="Chicken breasts">Chicken Breasts</option>
+                                <option value="Rotisserie Chicken">Rotisserie Chicken</option>
+                                <option value="Ground beef">Ground beef</option>
+                                <option value="Shrimp">Shrimp</option>
+                                <option value="Pork">Pork</option>
                             </select>
                         </div>
                     </form>
@@ -68,8 +70,8 @@
                         <div class = "form-group">
                             <select class = "form-control" id ="ingredient2">
                                 <option value selected ="selected"> Select an ingredient </option>
-                                <option value="one">one</option>
-                                <option value="two">two</option>
+                                <option value="Mushroom">Mushroom</option>
+                                <option value="Black Beans"> Black Beans</option>
                                 <option value="three">three</option>
                             </select>
                         </div>
@@ -91,10 +93,10 @@
                 </div>`
 
             <h3> Give your recipe a name </h3>
-            <input id = "recipeName" type="text" class="form-control-plaintext" placeholder= "Enter your recipe's name">
+                <input id = "recipeName" type="text" class="form-control-plaintext" placeholder= "Enter your recipe's name">
             <h3> And give us the link to the website where you found it </h3>
-            <input id = "recipeLink" type="text" class="form-control-plaintext" placeholder= "Enter your recipe's link">
-            <button onclick = "createRecipeJson()" > Submit </button>
+                <input id = "recipeLink" type="text" class="form-control-plaintext" placeholder= "Enter your recipe's link">
+            <button onclick = 'readData()' > Submit </button>
         </div>
 </body>
 </html>
