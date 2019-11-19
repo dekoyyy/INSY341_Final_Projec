@@ -28,6 +28,7 @@ function displayData(arr) { // test function to see if read data works, not usef
     document.getElementById("demo").innerHTML = result;
 }
 
+<<<<<<< HEAD
 function readData () { // straight out of slide 11 v3
     var loc = firebase.database().ref("recipes");
     firebase.database().ref("recipes").on('value', function(snapshot) {
@@ -42,6 +43,11 @@ function readData () { // straight out of slide 11 v3
         }
     );
 }
+=======
+function updateIngredient1Array(arr) { // adds opttions underneath ingredient1
+    var newOption;
+    var i = 0;
+>>>>>>> 61bd49a37eeb91a4db421e6b1e26321538a847a4
 
 function updateIngredientArrays(arr) { // updates ingredientArray. . It adds the name of every ingredient as an entry to the array ingredientArray,
     var newEntry = "";                  // stores locally the database
@@ -66,7 +72,12 @@ function updateIngredientArrays(arr) { // updates ingredientArray. . It adds the
     console.log(ingredientArray);
 }
 
+<<<<<<< HEAD
 function removeDupes(arr) { // will remove duplicates and put them in the ingredientArrayWithoutDuplicates
+=======
+function updateIngredient2Array(arr) { // adds opttions underneath ingredient1
+    var newOption;
+>>>>>>> 61bd49a37eeb91a4db421e6b1e26321538a847a4
     var i = 0;
     var j = 0;
     var targetId;
@@ -89,7 +100,11 @@ function removeDupes(arr) { // will remove duplicates and put them in the ingred
     console.log(ingredientArrayWithoutDupes);
 }
 
+<<<<<<< HEAD
 function addOptions(arr) { // dynamically adds options
+=======
+function updateIngredient3Array(arr) { // adds opttions underneath ingredient1
+>>>>>>> 61bd49a37eeb91a4db421e6b1e26321538a847a4
     var newOption;
     var targetId;
     var targetDom;
@@ -97,6 +112,7 @@ function addOptions(arr) { // dynamically adds options
     var i = 0;
     var j = 0;
 
+<<<<<<< HEAD
     for (i = 0; i < arr.length; i ++) {
         n = i + 1;
         targetId = "ingredient" + n;
@@ -107,6 +123,31 @@ function addOptions(arr) { // dynamically adds options
             newOption.text = arr[i][j];
             console.log(newOption);
             targetDom.add(newOption);
+=======
+    targetId = document.getElementById("ingredient3");
+
+    for (i = 0; i < arr.length; i++) {
+        newOption = document.createElement("option");
+        newOption.text = arr[i].ingredient3;
+        console.log(arr[i].ingredient3)
+        targetId.add(newOption);
+    }
+
+}
+
+function readData () {
+    var loc = firebase.database().ref("recipes");
+    firebase.database.ref("recipes").on('value', function(snapshot) {
+            console.log("got snapshot of all objects at this point in time");
+            snapshot.forEach(function(loc){
+                productArray.push(loc.val());
+                console.log(productArray)
+            });
+            // displayData(productArray);
+           //  updateIngredient1Array(ingredient1Array);
+           //  updateIngredient2Array(ingredient2Array);
+           //  updateIngredient3Array(ingredient3Array);
+>>>>>>> 61bd49a37eeb91a4db421e6b1e26321538a847a4
         }
     }
 }
