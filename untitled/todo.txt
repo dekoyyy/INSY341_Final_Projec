@@ -11,27 +11,34 @@ To-do list for final project
               -- Maximize the number of common ingredients
     -- Need to have images for every ingredient
         -- Edit pictures so that they have all the same dimensions
+        -- have a naming pattern so we can automatically generate the images we need
+              -- all have the same extension
+              -- have the same spelling as the name of the ingredient in Excel 
         
 - Transform recipes in JSON objects -- DONE 
 
 - Push JSON objects in firebase -- DONE 
-    - possible either directly in the database, or via a function in the script
+    - possible either directly in the database, or via a function in the script 
     
 - Create page to allow users to enter their recipes in the firebase database -- DONE
     - Dynamically create options with what is in the database -- DONE
         - Create array from database -- DONE
         - Remove duplicates from this array -- DONE
+        - Fix bug that adds all options when you push something -- DONE
+        - Set to selected/empty text input when saveData is done -- DONE
+        - make the dropdown prettier with bootstrap -- DONEish 
 
-
-- Fix bug with Carousel image so they fit properly 
+- For the display of the images
+      - Display one image at a time and have a button below that goes to the next ingredient -- DONE 
+            - better than carousel as we'll be able to directly determine the size of the images   
+            - change from text to image when we will have all the images done 
+      - only displays when page is reloaded 
 
 - Create function to get a recipe 
       - How it will work 
-            - When page loads, carousel loads dynamically with all the different Ingredient 1. 
+            - When page loads, images loads dynamically with all the different Ingredient 1. 
             - When selecting an Ingredient 1, narrows down to Ingredient 2 that have the Ingredient 1 selected
                   - If you choose chicken as Ingredient 1, only shows Ingredient 2 whose Ingredient 1 is chicken
-            - When Ingredient 3 is chosen, hides Carousel and shows the recipe link and recipe name 
+            - When Ingredient 3 is chosen, hides images and shows the recipe link and recipe name 
             
-- Create carousel dynamically 
-- 
 

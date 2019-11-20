@@ -1,4 +1,3 @@
-
 // Your web app's Firebase configuration
 var firebaseConfig = {
     apiKey: "AIzaSyALtS557uXjtEhKFwXmgmUsS5UKWhHTwaI",
@@ -11,85 +10,199 @@ var firebaseConfig = {
     measurementId: "G-ND4RGH5561"
 };
 
-var productArray = [];
+var productArray = []; // we will store the JSON Object there before we separate it in a multidimensional array
 var data = [];
-var ingredient1Array = [];
-var ingredient2Array = [];
-var ingredient3Array = [];
+var ingredientArray = [[],[],[]]; // ingredientArray[0] is the list of all ingredient 1 ingredientArray[0][0] is the first ingredient for the first recipe, ...
+var ingredientArrayWithoutDupes = [[], [], []];
+var counter = 0; // global variable for the change of ingredients 
+var ingredientNumber = 0; //global variable for the number of the ingredient
+var recipeArray = [];
 
-// var databaseLocation = new Firebase ('https://insy341-finalprojet.firebaseio.com');
 
-
-function displayData(arr) {
+function displayData(arr) { // test function to see if read data works, not useful
     var result = "";
     var i = 0;
     // add for loop so it cycles through each array
-    for (i = 0; i < arr[0].length; i++) {
-        result = result + arr[0][i].ingredient1 + "<br>";
+    for (i = 0; i < arr.length; i++) {
+        result = result + arr[i]['Ingredient 1'] + "<br>";
+        console.log(result);
     }
     document.getElementById("demo").innerHTML = result;
 }
 
-function updateIngredient1Array(arr) { // adds opttions underneath ingredient1
-    var newOption;
-    var i = 0;
-
-    targetId = document.getElementById("ingredient1")
-
-    for (i = 0; i < arr.length; i++) {
-        newOption = document.createElement("option");
-        newOption.text = arr[i].ingredient1;
-        console.log(arr[i].ingredient1);
-        targetId.add(newOption);
-    }
-
-}
-
-function updateIngredient2Array(arr) { // adds opttions underneath ingredient1
-    var newOption;
-    var i = 0;
-
-    targetId = document.getElementById("ingredient2")
-
-    for (i = 0; i < arr.length; i++) {
-        newOption = document.createElement("option");
-        newOption.text = arr[i].ingredient2;
-        console.log(arr[i].ingredient2)
-        targetId.add(newOption);
-    }
-
-}
-
-function updateIngredient3Array(arr) { // adds opttions underneath ingredient1
-    var newOption;
-    var i = 0;
-
-    targetId = document.getElementById("ingredient3");
-
-    for (i = 0; i < arr.length; i++) {
-        newOption = document.createElement("option");
-        newOption.text = arr[i].ingredient3;
-        console.log(arr[i].ingredient3)
-        targetId.add(newOption);
-    }
-
-}
-
-function readData () {
+function readData () { // straight out of slide 11 v3
     var loc = firebase.database().ref("recipes");
-    firebase.database.ref("recipes").on('value', function(snapshot) {
+    firebase.database().ref("recipes").on('value', function(snapshot) {
+            data = snapshot.val();
             console.log("got snapshot of all objects at this point in time");
             snapshot.forEach(function(loc){
-                productArray.push(loc.val());
-                console.log(productArray)
+                productArray.push(loc.val()); // push json object to productArray
             });
-            // displayData(productArray);
-           //  updateIngredient1Array(ingredient1Array);
-           //  updateIngredient2Array(ingredient2Array);
-           //  updateIngredient3Array(ingredient3Array);
+            console.log(productArray);
+            //  console.log(productArray[0]['Ingredient 1']);
+          updateIngredientArrays(productArray); // create 2 dimensional array with ingredient names
+          removeDupes(ingredientArray);
+          console.log("removed duplicates");
+          console.log(window.location.href.indexOf('index.html'));
+         if (window.location.href.indexOf('index.html') > -1) { // only call addChocies if the page is index.html
+              addChoices(ingredientArrayWithoutDupes); 
+         }
+          if (window.location.href.indexOf('enterRecipes.html') > -1) { // only call addOptions if the page is enterRecipes.html 
+              addOptions(ingredientArrayWithoutDupes);
+          } 
+          
+          
         }
+        
     );
 }
+
+function updateIngredientArrays(arr) { // updates ingredientArray. . It adds the name of every ingredient as an entry to the array ingredientArray,
+    var newEntry = "";                  // stores locally the database
+    var ingredientId;
+    var i = 0;
+    var j = 0;
+    var n;
+
+    // targetId = document.getElementById("ingredient1")
+   console.log('yes');
+    for (j = 0; j < 3; j++ ) { // loops three times, once for each ingredient
+        n = j + 1
+        target = ingredientArray[j]; // sets the target where we will push the different entries
+        ingredientId = "Ingredient " + n; // sets the name of the id we will get the value from
+        for (i = 0; i < arr.length; i++) { // loops through every recipe to add the ingredients to the array 
+            newEntry = arr[i][ingredientId];
+            // console.log(newEntry)
+            target.push(newEntry);  // pushing the ingredient
+        }
+        //console.log(target);
+    }
+    console.log(ingredientArray);
+}
+
+function removeDupes(arr) { // will remove duplicates and put them in the ingredientArrayWithoutDuplicates
+    var i = 0;
+    var j = 0;
+    var targetId;
+    var sourceId;
+    var possibleEntry;
+
+    for (i = 0; i < arr.length; i ++) { // will loop through Ingredient 1, ...
+        targetId = ingredientArrayWithoutDupes[i];
+        sourceId = ingredientArray[i];
+
+        for (j = 0; j < arr[0].length; j ++) { // will loop through every recipe
+            possibleEntry = sourceId[j];
+            if (targetId.includes(possibleEntry) == false) { // if the possibleEntry is not in the array, add it
+                targetId.push(possibleEntry);
+            }
+            // console.log(targetId);
+
+        }
+    }
+   // console.log(ingredientArrayWithoutDupes);
+}
+
+function addOptions(arr) { // dynamically adds options
+    console.log("add options is called");
+    var newOption;
+    var targetId;
+    var targetDom;
+    var n = 0;
+    var i = 0;
+    var j = 0;
+
+    for (i = 0; i < arr.length; i ++) { 
+        n = i + 1;
+        targetId = "ingredient" + n; // selects ingredient1, ...
+        targetDom = document.getElementById(targetId); // sets DOM
+
+        for (j = 0; j < arr[i].length; j ++) {
+            newOption = document.createElement("option"); // sets var equal to option
+            newOption.text = arr[i][j];                   // sets text equal to specific ingredient
+            newOption.value = arr[i][j];                  // sets value equal to specific ingredient
+            // console.log(newOption);
+            
+            targetDom.add(newOption);                      // adds ingredient as an option to target DOM 
+        }
+    }
+}
+
+function addChoices(arr) { // dynamically adds choices to index.html
+    console.log("add choices is called");
+    var targetId;
+    var targetDom; 
+    var i = 0; 
+    var n = 0; 
+    var index; 
+    var len; 
+  
+    len = arr[ingredientNumber].length;
+  
+    for (i = 0; i < arr.length; i ++) {
+      n = i + 1; 
+      targetId = "choice" + n;
+      console.log(targetId);
+      targetDom = document.getElementById(targetId);
+      index = (len - i) % len;
+    
+      targetDom.innerHTML = arr[ingredientNumber][index]; // add text to ingredient 1, ...
+      targetDom.setAttribute("value", arr[ingredientNumber][index]);
+      targetDom.setAttribute("onclick", "makeChoice(this.innerHTML)"); 
+    }
+}
+
+function changeChoices(arr) { // changes choices available in index.html 
+  console.log("change choices is called")
+    var index 
+    var indexModulo
+    var targetId;
+    var targetDom; 
+    var i = 0; 
+    var n = 0; 
+    var len
+    
+    len = arr[ingredientNumber].length
+  
+    counter ++; // Add 1 to counter everytime button is pressed 
+    index = counter + 2 * len; // sets index = counter dont ask but it works 
+  
+    for (i = 0; i < arr.length; i ++) { // no idea how it works but it does, basically moves every choice to the right 
+      n = i + 1; 
+      targetId = "choice" + n; // sets id 
+      targetDom = document.getElementById(targetId); // sets dom
+      indexModulo = Math.abs((len - index)) % len;
+      targetDom.innerHTML = arr[ingredientNumber][indexModulo];
+      targetDom.setAttribute("value", arr[ingredientNumber][indexModulo]);
+      targetDom.setAttribute("onclick", "makeChoice(this.innerHTML)")
+      index --;
+      // console.log(indexModulo);
+      // console.log(targetId);
+    }
+}
+
+function makeChoice(innerHTML) {
+  var i = 0;
+  var tempArray = []; 
+  
+  recipeArray[ingredientNumber] = innerHTML; // sets chosen ingredient to array index 
+  // console.log(recipeArray);
+  ingredientNumber ++; // add 1 to ingredientNumber
+  counter = 0; // resetCounter 
+  
+  if (ingredientNumber == 1) { // will try to change for for loop but right now, easier to do an if else 
+    for (i = 0; i < ingredientArray[1].length; i++) {
+      if (ingredientArray[0][i] == recipeArray[0]) {
+        tempArray.push(ingredientArray[1][i]); // gets the list of all 
+      }
+  
+    }
+    console.log(tempArray);
+  }
+}
+  
+  
+  
 
 var jasonObj =
     [
@@ -242,14 +355,14 @@ var jasonObj =
         }
     ]
 
-function createRecipeJson() {
-    var recipe = {};
+function createRecipeJson() { // creates a JSON object with the recipe that is created
+    var recipe = {}; // initializes the recipe object 
     var targetId;
     var i = 1;
-
-    for (i = 1; i < 4; i++) {
-        targetId = "ingredient" + i;
-        recipe[targetId] = getDropDownValue(i);
+ 
+    for (i = 1; i < 4; i++) { // loops through the three dropdowns 
+        targetId = "Ingredient " + i;
+        recipe[targetId] = getDropDownValue(i); // sets 
         console.log(recipe[targetId]);
     }
 
@@ -262,15 +375,17 @@ function createRecipeJson() {
     return recipe;
 }
 
-function saveData() {
+function saveData() { // pushes the recipe created by the user to the database 
         var obj = createRecipeJson();
         firebase.database().ref("recipes").push(obj);
         console.log("Saved");
+        window.location.reload(); // refreshes the page once the value is saved so that addOptions doesnt run a second time and add a bunch of options 
+                                  // honestly, couldnt find a prettier way to do so 
     }
 
 
 
-function getDropDownValue(i) {
+function getDropDownValue(i) { // returns the value selected in a drop down menu 
     var targetId;
     var e;
     var strUser;
@@ -278,6 +393,6 @@ function getDropDownValue(i) {
     targetId = "ingredient" + i;
     e = document.getElementById(targetId);
     strUser = e.options[e.selectedIndex].value;
-    return strUser;
-    console.log(strUser);
+    return strUser; // returns what is selected in the dropdown 
+    // console.log(strUser);
 }
