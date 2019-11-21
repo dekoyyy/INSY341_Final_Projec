@@ -32,13 +32,18 @@ To-do list for final project
       - Display one image at a time and have a button below that goes to the next ingredient -- DONE 
             - better than carousel as we'll be able to directly determine the size of the images   
             - change from text to image when we will have all the images done 
-      - only displays when page is reloaded 
+      - only displays when page is reloaded -- FIXEDish, issue with glitch. basically glitch doesnt load the index.html url unless you refresh the page 
 
 - Create function to get a recipe 
       - How it will work 
-            - When page loads, images loads dynamically with all the different Ingredient 1. 
-            - When selecting an Ingredient 1, narrows down to Ingredient 2 that have the Ingredient 1 selected
+            - When page loads, images loads dynamically with all the different Ingredient 1. -- DONE
+            
+            - When selecting an Ingredient 1, narrows down to Ingredient 2 that have the Ingredient 1 selected -- DONE
                   - If you choose chicken as Ingredient 1, only shows Ingredient 2 whose Ingredient 1 is chicken
+                  
+            - When selecting an Ingredient 2, narrows down to Ingredient 3 that have the Ingredient 1 selected and Ingredient 2 selected -- DONE
+                  - If you choose tomato as Ingredient 2, only shows Ingredient 3 whose Ingredient 1 is chicken and ingredient 2 is tomato
+                  
             - When Ingredient 3 is chosen, hides images and shows the recipe link and recipe name 
             
 
