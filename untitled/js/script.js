@@ -17,6 +17,7 @@ var ingredientArrayWithoutDupes = [[], [], []];
 var counter = 0; // global variable for the change of ingredients 
 var ingredientNumber = 0; //global variable for the number of the ingredient
 var recipeArray = [];
+var recipesChosen = [];
 var recipeNameAndLink = [[],[]];
 
 
@@ -202,13 +203,13 @@ function addChoices(arr) { // dynamically adds choices to index.html
 
 function changeChoices(arr) { // changes choices available in index.html
     console.log("change choices is called")
-    var index
-    var indexModulo
+    var index;
+    var indexModulo;
     var targetId;
     var targetDom;
     var i = 0;
     var n = 0;
-    var len
+    var len;
 
     len = arr[ingredientNumber].length
 
@@ -293,7 +294,6 @@ function makeChoice(innerHTML) { // adds choice to recipeArray and updates the c
 }
 
 function displayRecipe() { // function to display the possible recipes
-    var recipesChosen = [];
     var i = 0;
     var j = 0;
     var len;
@@ -302,14 +302,82 @@ function displayRecipe() { // function to display the possible recipes
     len = ingredientArray[0].length;
 
 
-    for (i = 0; i < len; i ++) {
-        if (ingredientArray[0][i] == recipeArray[0] && ingredientArray[1][i] == recipeArray[1] && ingredientArray[2][i] == recipeArray[2] ) { // push all recipes with ingredient 1 AND 2 AND 3
+    for (i = 0; i < len; i ++) { // push all recipes with ingredient 1 AND 2 AND 3
+        if (ingredientArray[0][i] == recipeArray[0] && ingredientArray[1][i] == recipeArray[1] && ingredientArray[2][i] == recipeArray[2] ) {
             recipesChosen.push(i);
         }
     }
-    console.log(recipesChosen)
+    var targetId;
+    var targetDom;
+    var n = 0;
+    var index;
+    var leng;
+    var newLink;
+    var newText;
+    var newId;
+
+    leng = recipesChosen.length;
+
+    for (i = 0; i < 3; i ++) {
+        n = i + 1;
+        targetId = "choice" + n;
+        // console.log(targetId);
+        targetDom = document.getElementById(targetId);
+        index = recipesChosen[(leng - i) % leng];
+        console.log(index);
+        // console.log(ingredientArray[3][index]);
+        //  console.log(ingredientArray[4][index]);
+
+        newId = "recipe" + n;
+        newLink = document.createElement("A");
+        newLink.setAttribute("href", ingredientArray[4][index]);
+        newLink.setAttribute("id", newId);
+        newText = document.createTextNode(ingredientArray[3][index]);
+        newLink.appendChild(newText);
+        targetDom.appendChild(newLink);
+        // targetDom.setAttribute("value", arr[ingredientNumber][index]);
+        // targetDom.setAttribute("onclick", "makeChoice(this.innerHTML)");
+    }
+
+
 }
 
+function changeButton() {
+    var targetDom;
+
+    targetDom = document.getElementById("button");
+    targetDom.setAttribute("onclick", "changeRecipe(recipesChosen)");
+}
+
+function changeRecipe(arr) {
+    console.log("change recipe is called");
+    var index;
+    var index2;
+    var indexModulo;
+    var targetId;
+    var targetDom;
+    var i = 0;
+    var n = 0;
+    var len;
+
+    len = arr.length;
+
+    counter ++; // Add 1 to counter everytime button is pressed
+    index = counter + 2 * len; // sets index = counter dont ask but it works
+
+    for (i = 0; i < 3; i ++) { // no idea how it works but it does, basically moves every choice to the right
+        n = i + 1;
+        targetId = "recipe" + n; // sets id
+        targetDom = document.getElementById(targetId); // sets dom
+        indexModulo = Math.abs((len - index)) % len;
+        index2 = arr[indexModulo];
+        targetDom.innerHTML = ingredientArray[3][index2];
+        targetDom.setAttribute("href", ingredientArray[4][index2]);
+        index --;
+        // console.log(indexModulo);
+        // console.log(targetId);
+    }
+}
 
 var jasonObj =
     [
@@ -473,11 +541,11 @@ function createRecipeJson() { // creates a JSON object with the recipe that is c
         console.log(recipe[targetId]);
     }
 
-    recipe["recipeName"] =document.getElementById("recipeName").value;
-    recipe["recipeLink"]= document.getElementById("recipeLink").value;
+    recipe["Name of recipe"] =document.getElementById("recipeName").value;
+    recipe["Link"]= document.getElementById("recipeLink").value;
 
-    console.log(recipe["recipeName"]);
-    console.log(recipe["recipeLink"]);
+    // console.log(recipe["recipeName"]);
+    //  console.log(recipe["recipeLink"]);
 
     return recipe;
 }
@@ -489,8 +557,6 @@ function saveData() { // pushes the recipe created by the user to the database
     window.location.reload(); // refreshes the page once the value is saved so that addOptions doesnt run a second time and add a bunch of options
                               // honestly, couldnt find a prettier way to do so
 }
-
-
 
 function getDropDownValue(i) { // returns the value selected in a drop down menu
     var targetId;
