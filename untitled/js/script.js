@@ -340,6 +340,7 @@ function displayRecipe() { // function to display the possible recipes
     }
 
 
+<<<<<<< HEAD
 }
 
 function changeButton() {
@@ -349,6 +350,17 @@ function changeButton() {
     targetDom.setAttribute("onclick", "changeRecipe(recipesChosen)");
 }
 
+=======
+}
+
+function changeButton() {
+    var targetDom;
+
+    targetDom = document.getElementById("button");
+    targetDom.setAttribute("onclick", "changeRecipe(recipesChosen)");
+}
+
+>>>>>>> 324749a7573f6d10e6daafde3038f8b9176f9195
 function changeRecipe(arr) {
     console.log("change recipe is called");
     var index;
