@@ -41,11 +41,11 @@ function readData () { // straight out of slide 11 v3
                 productArray.push(loc.val()); // push json object to productArray
             });
             console.log(productArray);
-           // console.log(productArray[0]['Name of recipe']);
+            // console.log(productArray[0]['Name of recipe']);
             updateIngredientArrays(productArray); // create 2 dimensional array with ingredient names
             removeDupes(ingredientArray);
             console.log("removed duplicates");
-             // console.log(window.location.href.indexOf('index.html'));
+            // console.log(window.location.href.indexOf('index.html'));
             if (window.location.href.indexOf('index.html') > -1) { // only call addChocies if the page is index.html
                 addChoices(ingredientArrayWithoutDupes);
             }
@@ -77,7 +77,7 @@ function updateIngredientArrays(arr) { // updates ingredientArray. . It adds the
 
     console.log('yes');
     for (j = 0; j < 3; j++ ) { // loops three times, once for each ingredient
-        n = j + 1
+        n = j + 1;
         target = ingredientArray[j]; // sets the target where we will push the different entries
         ingredientId = "Ingredient " + n; // sets the name of the id we will get the value from
         for (i = 0; i < len; i++) { // loops through every recipe to add the ingredients to the array
@@ -202,7 +202,7 @@ function addChoices(arr) { // dynamically adds choices to index.html
 }
 
 function changeChoices(arr) { // changes choices available in index.html
-    console.log("change choices is called")
+    console.log("change choices is called");
     var index;
     var indexModulo;
     var targetId;
@@ -211,7 +211,7 @@ function changeChoices(arr) { // changes choices available in index.html
     var n = 0;
     var len;
 
-    len = arr[ingredientNumber].length
+    len = arr[ingredientNumber].length;
 
     counter ++; // Add 1 to counter everytime button is pressed
     index = counter + 2 * len; // sets index = counter dont ask but it works
@@ -223,7 +223,7 @@ function changeChoices(arr) { // changes choices available in index.html
         indexModulo = Math.abs((len - index)) % len;
         targetDom.innerHTML = arr[ingredientNumber][indexModulo];
         targetDom.setAttribute("value", arr[ingredientNumber][indexModulo]);
-        targetDom.setAttribute("onclick", "makeChoice(this.innerHTML)")
+        targetDom.setAttribute("onclick", "makeChoice(this.innerHTML)");
         index --;
         // console.log(indexModulo);
         // console.log(targetId);
@@ -263,7 +263,7 @@ function makeChoice(innerHTML) { // adds choice to recipeArray and updates the c
         for (i = 0; i < ingredientArray[ingredientNumber].length; i++) {
             if (ingredientArray[0][i] == recipeArray[0]) {
                 tempArray.push(ingredientArray[1][i]); // gets the list of all the possibilities that are under a certain choice.
-                                                                         // i.e. if you choose chicken, lists all the recipes whosesecond ingredient that have chicken as a first ingredient
+                // i.e. if you choose chicken, lists all the recipes whosesecond ingredient that have chicken as a first ingredient
                 // console.log(tempArray);
             }
 
@@ -340,7 +340,6 @@ function displayRecipe() { // function to display the possible recipes
     }
 
 
-<<<<<<< HEAD
 }
 
 function changeButton() {
@@ -350,17 +349,6 @@ function changeButton() {
     targetDom.setAttribute("onclick", "changeRecipe(recipesChosen)");
 }
 
-=======
-}
-
-function changeButton() {
-    var targetDom;
-
-    targetDom = document.getElementById("button");
-    targetDom.setAttribute("onclick", "changeRecipe(recipesChosen)");
-}
-
->>>>>>> 324749a7573f6d10e6daafde3038f8b9176f9195
 function changeRecipe(arr) {
     console.log("change recipe is called");
     var index;
@@ -540,7 +528,7 @@ var jasonObj =
             "Name of recipe": "Pork Fried Rice",
             "Link": "https://www.allrecipes.com/recipe/230818/pork-fried-rice/"
         }
-    ]
+    ];
 
 function createRecipeJson() { // creates a JSON object with the recipe that is created
     var recipe = {}; // initializes the recipe object
