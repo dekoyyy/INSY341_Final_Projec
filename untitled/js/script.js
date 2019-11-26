@@ -177,11 +177,7 @@ function addOptions(arr) { // dynamically adds options
 
 function addChoices(arr) { // dynamically adds choices to index.html
     console.log("add choices is called");
-    var targetId;
-    var targetDom;
     var i = 0;
-    var n = 0;
-    var index;
     var len;
     console.log("counter is ", counter);
     console.log("ingredient number is ", ingredientNumber);
@@ -189,24 +185,51 @@ function addChoices(arr) { // dynamically adds choices to index.html
     len = arr[ingredientNumber].length;
 
     for (i = 0; i < arr.length; i ++) {
-        n = i + 1;
-        targetId = "choice" + n;
-        // console.log(targetId);
-        targetDom = document.getElementById(targetId);
-        index = (len - i) % len;
+        let n = i + 1;
+      
+        let targetId = "choice" + n;
+        let targetDom = document.getElementById(targetId);
+        let tempChoiceId = "tempChoice" + n;
+      
+        let pictureId = "img" + n;
+        let pictureDom = document.getElementById(pictureId);
+        let tempPictureId = "tempPicture" + n;
 
-        targetDom.innerHTML = arr[ingredientNumber][index]; // add text to ingredient 1, ...
-        targetDom.setAttribute("value", arr[ingredientNumber][index]);
-        targetDom.setAttribute("onclick", "makeChoice(this.innerHTML)");
+        let index = (len - i) % len;
+        let choice = arr[ingredientNumber][index];
+        let srcId = "img/" + choice + ".jpg"
+     
+        let newImg = document.createElement("img");
+        let makeChoiceId = "makeChoice(" + targetId + ".innerHTML)";
+        newImg.setAttribute("src", srcId);
+        newImg.setAttribute("value", choice);
+        newImg.setAttribute("id", pictureId);
+        newImg.setAttribute("onclick", makeChoiceId);
+        newImg.setAttribute("class", "mx-auto d-block img-thumbnail");
+        newImg.setAttribute("style", "height:300px");
+        pictureDom.appendChild(newImg);
+      
+        pictureDom.setAttribute("id", tempPictureId);
+      
+        let newTxt = document.createElement("p");
+        newTxt.setAttribute("value", choice);
+        newTxt.setAttribute("onclick", "makeChoice(this.innerHTML)");
+        newTxt.setAttribute("class", "mx-auto d-block");
+        newTxt.setAttribute("id", targetId)
+      
+        let newContent = document.createTextNode(choice);
+        newTxt.appendChild(newContent);
+        targetDom.appendChild(newTxt);
+      
+        targetDom.setAttribute("id", tempChoiceId);
+        //targetDom.innerHTML = choice; // add text to ingredient 1, ...
+       
     }
 }
 
 function changeChoices(arr) { // changes choices available in index.html
     console.log("change choices is called");
     var index;
-    var indexModulo;
-    var targetId;
-    var targetDom;
     var i = 0;
     var n = 0;
     var len;
@@ -218,12 +241,22 @@ function changeChoices(arr) { // changes choices available in index.html
 
     for (i = 0; i < arr.length; i ++) { // no idea how it works but it does, basically moves every choice to the right
         n = i + 1;
-        targetId = "choice" + n; // sets id
-        targetDom = document.getElementById(targetId); // sets dom
-        indexModulo = Math.abs((len - index)) % len;
-        targetDom.innerHTML = arr[ingredientNumber][indexModulo];
-        targetDom.setAttribute("value", arr[ingredientNumber][indexModulo]);
-        targetDom.setAttribute("onclick", "makeChoice(this.innerHTML)");
+        let targetId = "choice" + n; // sets id
+        let targetDom = document.getElementById(targetId); // sets dom
+        
+        let pictureId = "img" + n;
+        let pictureDom = document.getElementById(pictureId);
+      
+        let indexModulo = Math.abs((len - index)) % len;
+        let choice = arr[ingredientNumber][indexModulo];
+        let srcId = "img/" + choice + ".jpg"
+    
+        pictureDom.setAttribute("src", srcId);
+        pictureDom.setAttribute("value", choice);
+      
+        targetDom.setAttribute("value", choice);
+        targetDom.innerHTML = choice;
+      
         index --;
         // console.log(indexModulo);
         // console.log(targetId);
@@ -233,17 +266,27 @@ function changeChoices(arr) { // changes choices available in index.html
 function clearChoice() {
     var i = 0;
     var n = 0;
-    var targetId;
-    var targetDom;
+   
 
 
     for (i = 0; i < 3; i++) {
         n = i + 1;
-        targetId = "choice" + n;
-        targetDom = document.getElementById(targetId);
-        targetDom.innerHTML = "";
-        targetDom.setAttribute("value", null);
-        targetDom.setAttribute("onclick", null);
+        let targetId = "choice" + n;
+        let targetDom = document.getElementById(targetId);
+        let tempChoiceId = "tempChoice" + n
+        let tempChoiceDom = document.getElementById(tempChoiceId);
+      
+        let pictureId = "img" + n;
+        let pictureDom = document.getElementById(pictureId);
+        let tempPictureId = "tempPicture" + n;
+        let tempPictureDom = document.getElementById(tempPictureId);
+      
+        targetDom.parentNode.removeChild(targetDom);
+        pictureDom.parentNode.removeChild(pictureDom);
+      
+        tempChoiceDom.setAttribute("id", targetId);
+        tempPictureDom.setAttribute("id", pictureId);
+        
     }
 }
 
