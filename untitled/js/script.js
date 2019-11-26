@@ -27,7 +27,7 @@ function displayData(arr) { // test function to see if read data works, not usef
     // add for loop so it cycles through each array
     for (i = 0; i < arr.length; i++) {
         result = result + arr[i]['Ingredient 1'] + "<br>";
-        console.log(result);
+        // console.log(result);
     }
     document.getElementById("demo").innerHTML = result;
 }
@@ -40,11 +40,11 @@ function readData () { // straight out of slide 11 v3
             snapshot.forEach(function(loc){
                 productArray.push(loc.val()); // push json object to productArray
             });
-            console.log(productArray);
+            // console.log(productArray);
             // console.log(productArray[0]['Name of recipe']);
             updateIngredientArrays(productArray); // create 2 dimensional array with ingredient names
             removeDupes(ingredientArray);
-            console.log("removed duplicates");
+            // console.log("removed duplicates");
             // console.log(window.location.href.indexOf('index.html'));
             if (window.location.href.indexOf('index.html') > -1) { // only call addChocies if the page is index.html
                 addChoices(ingredientArrayWithoutDupes);
@@ -75,7 +75,7 @@ function updateIngredientArrays(arr) { // updates ingredientArray. . It adds the
 
     len = arr.length;
 
-    console.log('yes');
+    // console.log('yes');
     for (j = 0; j < 3; j++ ) { // loops three times, once for each ingredient
         n = j + 1;
         target = ingredientArray[j]; // sets the target where we will push the different entries
@@ -99,7 +99,7 @@ function updateIngredientArrays(arr) { // updates ingredientArray. . It adds the
         recipeNameTarget.push(newRecipe);
         recipeLinkTarget.push(newLink);
     }
-    console.log(ingredientArray);
+    // console.log(ingredientArray);
 }
 
 function removeDupes(arr) { // will remove duplicates and put them in the ingredientArrayWithoutDuplicates
@@ -131,23 +131,23 @@ function updateArrayWithoutDuplicates (arr, i) { // removes the ingredients that
     var len;
     var tempArray = [];
     var possibleEntry;
-    console.log("updateArrayWithoutDuplicates is called");
+    // console.log("updateArrayWithoutDuplicates is called");
     //console.log(arr);
-    console.log(ingredientArrayWithoutDupes);
+    // console.log(ingredientArrayWithoutDupes);
 
     targetId = ingredientArrayWithoutDupes[i];
     len = targetId.length;
 
     for (j = 0; j < len; j++) { // we loop through every element in the ingredientArrayWithoutDuplicates
         possibleEntry =  targetId[j];
-        console.log(arr.includes(possibleEntry));
+        // console.log(arr.includes(possibleEntry));
         if (arr.includes(possibleEntry) == true) { // if arr include the possible entry, we remove the possible entry from ingredientArrayWithoutDuplicates
             tempArray.push(possibleEntry);
         }
     }
-    console.log(tempArray);
+    // console.log(tempArray);
     ingredientArrayWithoutDupes[i] = tempArray.slice(0);
-    console.log(ingredientArrayWithoutDupes);
+    // console.log(ingredientArrayWithoutDupes);
 }
 
 function addOptions(arr) { // dynamically adds options
@@ -176,18 +176,18 @@ function addOptions(arr) { // dynamically adds options
 }
 
 function addChoices(arr) { // dynamically adds choices to index.html
-    console.log("add choices is called");
     var i = 0;
     var len;
-    console.log("counter is ", counter);
-    console.log("ingredient number is ", ingredientNumber);
+    // console.log("add choices is called");
+    // console.log("counter is ", counter);
+    // console.log("ingredient number is ", ingredientNumber);
 
     len = arr[ingredientNumber].length;
 
     for (i = 0; i < arr.length; i ++) {
         let n = i + 1;
       
-        let targetId = "choice" + n;
+        let targetId = "choice" + n; // setting doms
         let targetDom = document.getElementById(targetId);
         let tempChoiceId = "tempChoice" + n;
       
@@ -263,7 +263,7 @@ function changeChoices(arr) { // changes choices available in index.html
     }
 }
 
-function clearChoice() {
+function clearChoice() { // removes the images and sets the div's id back to choice1, ... and img1, ... 
     var i = 0;
     var n = 0;
    
@@ -599,6 +599,7 @@ function saveData() { // pushes the recipe created by the user to the database
     console.log("Saved");
     window.location.reload(); // refreshes the page once the value is saved so that addOptions doesnt run a second time and add a bunch of options
                               // honestly, couldnt find a prettier way to do so
+  alert("Your recipe is saved!")
 }
 
 function getDropDownValue(i) { // returns the value selected in a drop down menu
