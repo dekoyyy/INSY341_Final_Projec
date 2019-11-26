@@ -199,7 +199,7 @@ function addChoices(arr) { // dynamically adds choices to index.html
         let choice = arr[ingredientNumber][index];
         let srcId = "img/" + choice + ".jpg"
      
-        let newImg = document.createElement("img");
+        let newImg = document.createElement("img"); // creating a new img and setting src, value, ...
         let makeChoiceId = "makeChoice(" + targetId + ".innerHTML)";
         newImg.setAttribute("src", srcId);
         newImg.setAttribute("value", choice);
@@ -209,15 +209,15 @@ function addChoices(arr) { // dynamically adds choices to index.html
         newImg.setAttribute("style", "height:300px");
         pictureDom.appendChild(newImg);
       
-        pictureDom.setAttribute("id", tempPictureId);
+        pictureDom.setAttribute("id", tempPictureId); // setting the div id to another id that will be used by clearChocies
       
-        let newTxt = document.createElement("p");
+        let newTxt = document.createElement("p"); // creatin a new para and setting value, onclick, ... 
         newTxt.setAttribute("value", choice);
         newTxt.setAttribute("onclick", "makeChoice(this.innerHTML)");
         newTxt.setAttribute("class", "mx-auto d-block");
         newTxt.setAttribute("id", targetId)
       
-        let newContent = document.createTextNode(choice);
+        let newContent = document.createTextNode(choice);  
         newTxt.appendChild(newContent);
         targetDom.appendChild(newTxt);
       
